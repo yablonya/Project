@@ -6,20 +6,19 @@ import java.util.ArrayList;
 
 @Data
 public class UserEntity {
-    static long counter = 0;
-    private final long id;
     private final String name;
     private final String surname;
-    private final int password;
+    private final String email;
+    private final String password;
     private int height;
     private int weight;
     private ArrayList<String[]> progress;
     private ArrayList<String> notes;
 
-    public UserEntity(String name, String surname, int password) {
-        this.id = counter++;
+    public UserEntity(String name, String surname, String email, String password) {
         this.name = name;
         this.surname = surname;
+        this.email = email;
         this.password = password;
     }
 }

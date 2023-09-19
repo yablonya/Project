@@ -6,19 +6,21 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 public class UserRepository {
-    private ArrayList<UserEntity> users;
+    private final ArrayList<UserEntity> users = new ArrayList<>();
 
-    public Optional<UserEntity> getUser(long id) {
+    public Optional<UserEntity> getUser(String email, String password) {
         return users.stream()
-                .filter(user -> user.getId() == id)
+                .filter((item) -> (
+                        item.getEmail().equals(email) && item.getPassword().equals(password)
+                ))
                 .findFirst();
     }
 
-    public void addUser( UserEntity user ) {
+    public void addUser(UserEntity user) {
         users.add(user);
     }
 
-    public void deleteUser( UserEntity user ) {
-        users.removeIf((item) -> item.getId() == user.getId());
+    public void deleteUser(String email, String password) {
+        users.remove(this.getUser(email, password).orElse(null));
     }
 }
