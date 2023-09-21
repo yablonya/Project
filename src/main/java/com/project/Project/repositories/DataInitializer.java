@@ -24,28 +24,24 @@ public class DataInitializer {
         TrainingProgramEntity legs;
         TrainingProgramEntity cardio;
         chest.getExercises().addAll(Arrays.asList(
-                new ExerciseEntity(
-                        "Жим лежачи",
-                        "10 повторювань по 4 підходи",
-                        imageToBytes("src/main/resources/exercise-images/bench-press.jpg")),
-                new ExerciseEntity(
-                        "Жим лежачи",
-                        "10 повторювань по 4 підходи",
-                        imageToBytes("src/main/resources/exercise-images/bench-press.jpg"))
+                exerciseFactory("Жим лежачи", "10 повторювань по 4 підходи",
+                        "src/main/resources/exercise-images/bench-press.jpg"),
+                exerciseFactory("Жим лежачи", "10 повторювань по 4 підходи",
+                        "src/main/resources/exercise-images/bench-press.jpg")
         ));
         back.getExercises().addAll(Arrays.asList(
-                new ExerciseEntity(
-                        "Тяга блоку до поясу сидячи",
-                        "20 повторювань по 4 підходи",
-                        imageToBytes("src/main/resources/exercise-images/bench-press.jpg")),
-                new ExerciseEntity(
-                        "Тяга блоку до поясу сидячи",
-                        "20 повторювань по 4 підходи",
-                        imageToBytes("src/main/resources/exercise-images/bench-press.jpg"))
+                exerciseFactory("Тяга блоку до поясу сидячи", "20 повторювань по 4 підходи",
+                        "src/main/resources/exercise-images/bench-press.jpg"),
+                exerciseFactory("Тяга блоку до поясу сидячи", "20 повторювань по 4 підходи",
+                        "src/main/resources/exercise-images/bench-press.jpg")
         ));
 
         programRepository.addProgram(chest);
         programRepository.addProgram(back);
+    }
+
+    private ExerciseEntity exerciseFactory(String name, String repetitions, String imagePath) {
+        return new ExerciseEntity(name, repetitions, imageToBytes(imagePath));
     }
 
     private byte[] imageToBytes(String imagePath) {
