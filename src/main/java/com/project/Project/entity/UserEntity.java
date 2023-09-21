@@ -10,10 +10,8 @@ public class UserEntity {
     private final String surname;
     private final String email;
     private final String password;
-    private int height;
-    private int weight;
-    private ArrayList<String[]> progress;
-    private ArrayList<String> notes;
+    private ArrayList<ProgressRecordEntity> progress = new ArrayList<>();
+    private ArrayList<String> notes = new ArrayList<>();
 
     public UserEntity(String name, String surname, String email, String password) {
         this.name = name;
