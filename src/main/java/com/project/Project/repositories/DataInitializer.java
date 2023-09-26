@@ -21,8 +21,8 @@ public class DataInitializer {
     public void initializeDate() {
         TrainingProgramEntity chest = new TrainingProgramEntity("Груди");
         TrainingProgramEntity back = new TrainingProgramEntity("Спина");
-        TrainingProgramEntity legs;
-        TrainingProgramEntity cardio;
+        TrainingProgramEntity legs = new TrainingProgramEntity("Ноги");;
+        TrainingProgramEntity cardio = new TrainingProgramEntity("Кардіо");;
         chest.getExercises().addAll(Arrays.asList(
                 exerciseFactory("Жим лежачи", "10 повторювань по 4 підходи",
                         "src/main/resources/exercise-images/bench-press.jpg"),
@@ -35,9 +35,23 @@ public class DataInitializer {
                 exerciseFactory("Тяга блоку до поясу сидячи", "20 повторювань по 4 підходи",
                         "src/main/resources/exercise-images/bench-press.jpg")
         ));
+        legs.getExercises().addAll(Arrays.asList(
+                exerciseFactory("Тяга блоку до поясу сидячи", "20 повторювань по 4 підходи",
+                        "src/main/resources/exercise-images/bench-press.jpg"),
+                exerciseFactory("Тяга блоку до поясу сидячи", "20 повторювань по 4 підходи",
+                        "src/main/resources/exercise-images/bench-press.jpg")
+        ));
+        cardio.getExercises().addAll(Arrays.asList(
+                exerciseFactory("Тяга блоку до поясу сидячи", "20 повторювань по 4 підходи",
+                        "src/main/resources/exercise-images/bench-press.jpg"),
+                exerciseFactory("Тяга блоку до поясу сидячи", "20 повторювань по 4 підходи",
+                        "src/main/resources/exercise-images/bench-press.jpg")
+        ));
 
         programRepository.addProgram(chest);
         programRepository.addProgram(back);
+        programRepository.addProgram(legs);
+        programRepository.addProgram(cardio);
     }
 
     private ExerciseEntity exerciseFactory(String name, String repetitions, String imagePath) {

@@ -4,17 +4,25 @@ import com.project.Project.entity.ProgressRecordEntity;
 import com.project.Project.entity.UserEntity;
 import com.project.Project.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
 
-    public UserEntity createUser(UserEntity user) {
-        return userRepository.addUser(user);
+    public UserEntity createUser(UserEntity userData) {
+        UserEntity user = getUser(userData.getEmail(), userData.getPassword()).orElse(null);
+        if (user == null) {
+            UserEntity newUser = userRepository.addUser(userData);
+            log.info("Saving new User {}:", newUser);
+            return newUser;
+        }
+        return null;
     }
 
     public Optional<UserEntity> getUser(String email, String password) {
