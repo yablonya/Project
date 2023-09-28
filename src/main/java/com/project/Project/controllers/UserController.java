@@ -21,12 +21,15 @@ public class UserController {
     }
 
     @GetMapping("/get-user-info")
-    public ResponseEntity<UserEntity> getUserInfo(String email, String password) {
+    public ResponseEntity<UserEntity> getUserInfo(@RequestParam String email, @RequestParam String password) {
         return ResponseEntity.of(userService.getUser(email, password));
     }
 
     @PostMapping("/add-progress-record")
-    public ResponseEntity<UserEntity> addProgressRecord(Integer height, Integer weight, String email, String password) {
+    public ResponseEntity<UserEntity> addProgressRecord(
+            @RequestParam Integer height,
+            @RequestParam Integer weight,
+            @RequestParam String email, String password) {
         try {
             return ResponseEntity.ok(userService.addProgressRecord(height, weight, email, password));
         } catch (Exception e) {
@@ -35,7 +38,10 @@ public class UserController {
     }
 
     @PostMapping("/add-note")
-    public ResponseEntity<UserEntity> addNote(String note, String email, String password) {
+    public ResponseEntity<UserEntity> addNote(
+            @RequestParam String note,
+            @RequestParam String email,
+            @RequestParam String password) {
         try {
             return ResponseEntity.ok(userService.addNote(note, email, password));
         } catch (Exception e) {
@@ -44,7 +50,7 @@ public class UserController {
     }
 
     @PostMapping("/delete-user")
-    public ResponseEntity<Void> deleteUser(String email, String password) {
+    public ResponseEntity<Void> deleteUser(@RequestParam String email,@RequestParam String password) {
         userService.deleteUser(email, password);
         return ResponseEntity.noContent().build();
     }

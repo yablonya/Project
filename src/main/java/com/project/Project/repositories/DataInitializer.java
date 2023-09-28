@@ -24,27 +24,71 @@ public class DataInitializer {
         TrainingProgramEntity legs = new TrainingProgramEntity("Ноги");;
         TrainingProgramEntity cardio = new TrainingProgramEntity("Кардіо");;
         chest.getExercises().addAll(Arrays.asList(
-                exerciseFactory("Жим лежачи", "10 повторювань по 4 підходи",
+                exerciseFactory("Жим лежачи", 10, 4,
                         "src/main/resources/exercise-images/bench-press.jpg"),
-                exerciseFactory("Жим лежачи", "10 повторювань по 4 підходи",
+                exerciseFactory("Жим штанги під кутом", 12, 4,
+                        "src/main/resources/exercise-images/bench-press.jpg"),
+                exerciseFactory("Метелик", 20, 4,
+                        "src/main/resources/exercise-images/bench-press.jpg"),
+                exerciseFactory("Жим гантелей на горизонтальній лавці", 12, 4,
+                        "src/main/resources/exercise-images/bench-press.jpg"),
+                exerciseFactory("Розведення під кутом", 15, 4,
+                        "src/main/resources/exercise-images/bench-press.jpg"),
+                exerciseFactory("Жим гантелей сидячи", 12, 4,
+                        "src/main/resources/exercise-images/bench-press.jpg"),
+                exerciseFactory("Махи в сторони", 20, 3,
+                        "src/main/resources/exercise-images/bench-press.jpg"),
+                exerciseFactory("Махи перед собою", 15, 4,
                         "src/main/resources/exercise-images/bench-press.jpg")
         ));
         back.getExercises().addAll(Arrays.asList(
-                exerciseFactory("Тяга блоку до поясу сидячи", "20 повторювань по 4 підходи",
+                exerciseFactory("Тяга блоку до поясу сидячи", 20, 4,
                         "src/main/resources/exercise-images/bench-press.jpg"),
-                exerciseFactory("Тяга блоку до поясу сидячи", "20 повторювань по 4 підходи",
+                exerciseFactory("Рижачна тяга сидячи", 15, 4,
+                        "src/main/resources/exercise-images/bench-press.jpg"),
+                exerciseFactory("Пуловер з гантелею", 12, 4,
+                        "src/main/resources/exercise-images/bench-press.jpg"),
+                exerciseFactory("Тяга штанги під нахилом", 10, 4,
+                        "src/main/resources/exercise-images/bench-press.jpg"),
+                exerciseFactory("Рижачна тяга зверху", 15, 4,
+                        "src/main/resources/exercise-images/bench-press.jpg"),
+                exerciseFactory("Тяга блоку перед головою", 20, 3,
+                        "src/main/resources/exercise-images/bench-press.jpg"),
+                exerciseFactory("Махи назад під нахилом", 20, 4,
+                        "src/main/resources/exercise-images/bench-press.jpg"),
+                exerciseFactory("Шраги", 15, 4,
                         "src/main/resources/exercise-images/bench-press.jpg")
         ));
         legs.getExercises().addAll(Arrays.asList(
-                exerciseFactory("Тяга блоку до поясу сидячи", "20 повторювань по 4 підходи",
+                exerciseFactory("Розгинання сидячи", 20, 4,
                         "src/main/resources/exercise-images/bench-press.jpg"),
-                exerciseFactory("Тяга блоку до поясу сидячи", "20 повторювань по 4 підходи",
+                exerciseFactory("Жим однією ногою", 15, 4,
+                        "src/main/resources/exercise-images/bench-press.jpg"),
+                exerciseFactory("Присідання зі штангою", 10, 4,
+                        "src/main/resources/exercise-images/bench-press.jpg"),
+                exerciseFactory("Випади в штанзі", 12 , 4,
+                        "src/main/resources/exercise-images/bench-press.jpg"),
+                exerciseFactory("Згинання лежачи", 20, 4,
+                        "src/main/resources/exercise-images/bench-press.jpg"),
+                exerciseFactory("Згинання сидячи", 15, 4,
+                        "src/main/resources/exercise-images/bench-press.jpg"),
+                exerciseFactory("Екстензія", 12, 4,
+                        "src/main/resources/exercise-images/bench-press.jpg"),
+                exerciseFactory("Голінь сидячи", 30, 3,
+                        "src/main/resources/exercise-images/bench-press.jpg"),
+                exerciseFactory("Голінь стоячи", 15, 4,
                         "src/main/resources/exercise-images/bench-press.jpg")
         ));
         cardio.getExercises().addAll(Arrays.asList(
-                exerciseFactory("Тяга блоку до поясу сидячи", "20 повторювань по 4 підходи",
+                exerciseFactory("Ходьба на біговій доріжці", 5,
                         "src/main/resources/exercise-images/bench-press.jpg"),
-                exerciseFactory("Тяга блоку до поясу сидячи", "20 повторювань по 4 підходи",
+                exerciseFactory("Біг з нагрузкою", 5,
+                        "src/main/resources/exercise-images/bench-press.jpg"),
+                exerciseFactory("Степер", 5,
+                        "src/main/resources/exercise-images/bench-press.jpg"),
+                exerciseFactory("Велотренажер", 5,
+                        "src/main/resources/exercise-images/bench-press.jpg"),
+                exerciseFactory("Велотренажер з легким темпом", 5 ,
                         "src/main/resources/exercise-images/bench-press.jpg")
         ));
 
@@ -54,8 +98,12 @@ public class DataInitializer {
         programRepository.addProgram(cardio);
     }
 
-    private ExerciseEntity exerciseFactory(String name, String repetitions, String imagePath) {
-        return new ExerciseEntity(name, repetitions, imageToBytes(imagePath));
+    private ExerciseEntity exerciseFactory(String name, Integer repetitions, Integer approaches, String imagePath) {
+        return new ExerciseEntity(name, new Integer[]{repetitions, approaches}, imageToBytes(imagePath));
+    }
+
+    private ExerciseEntity exerciseFactory(String name, Integer minutes, String imagePath) {
+        return new ExerciseEntity(name, new Integer[]{minutes}, imageToBytes(imagePath));
     }
 
     private byte[] imageToBytes(String imagePath) {

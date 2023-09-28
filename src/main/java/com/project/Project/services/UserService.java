@@ -16,10 +16,9 @@ public class UserService {
     private final UserRepository userRepository;
 
     public UserEntity createUser(UserEntity userData) {
-        UserEntity user = getUser(userData.getEmail(), userData.getPassword()).orElse(null);
-        if (user == null) {
+        if (!userRepository.findUser(userData.getEmail())) {
             UserEntity newUser = userRepository.addUser(userData);
-            log.info("Saving new User {}:", newUser);
+            log.info("Saved new User {}:", newUser);
             return newUser;
         }
         return null;
@@ -43,5 +42,6 @@ public class UserService {
 
     public void deleteUser(String email, String password) {
         userRepository.deleteUser(email, password);
+        log.info("Deleted User with email {}:", email);
     }
 }
