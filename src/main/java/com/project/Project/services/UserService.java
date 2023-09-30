@@ -16,7 +16,7 @@ public class UserService {
     private final UserRepository userRepository;
 
     public UserEntity createUser(UserEntity userData) {
-        if (!userRepository.findUser(userData.getEmail())) {
+        if (userRepository.getUser(userData.getEmail()) == null) {
             UserEntity newUser = userRepository.addUser(userData);
             log.info("Saved new User {}:", newUser);
             return newUser;
@@ -25,18 +25,30 @@ public class UserService {
     }
 
     public Optional<UserEntity> getUser(String email, String password) {
-        return userRepository.getUser(email, password);
+        return userRepository.logUser(email, password);
     }
 
-    public UserEntity addProgressRecord(Integer height, Integer weight, String email, String password) {
-        UserEntity user = getUser(email, password).orElse(null);
-        if (user != null) { user.getProgress().add(new ProgressRecordEntity(height, weight)); }
+    public UserEntity addProgressRecord(ProgressRecordEntity progressRecord, String email) {
+        UserEntity user = userRepository.getUser(email);
+        if (user != null) { user.getProgress().add(progressRecord); }
         return user;
     }
 
-    public UserEntity addNote(String note, String email, String password) {
-        UserEntity user = getUser(email, password).orElse(null);
+    public UserEntity deleteProgressRecord(ProgressRecordEntity progressRecord, String email) {
+        UserEntity user = userRepository.getUser(email);
+        if (user != null) { user.getProgress().remove(progressRecord); }
+        return user;
+    }
+
+    public UserEntity addNote(String note, String email) {
+        UserEntity user = userRepository.getUser(email);
         if (user != null) { user.getNotes().add(note); }
+        return user;
+    }
+
+    public UserEntity deleteNote(String note, String email) {
+        UserEntity user = userRepository.getUser(email);
+        if (user != null) { user.getNotes().remove(note); }
         return user;
     }
 

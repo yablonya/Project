@@ -1,18 +1,14 @@
 package com.project.Project.entity;
 
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Data
+@RequiredArgsConstructor
 public class ProgressRecordEntity {
-    private Integer height;
-    private Integer weight;
-    private LocalDateTime creationDate;
-
-    public ProgressRecordEntity(Integer height, Integer weight) {
-        this.height = height;
-        this.weight = weight;
-        this.creationDate = LocalDateTime.now();
-    }
+    private String height;
+    private String weight;
+    private String creationDate;
 }

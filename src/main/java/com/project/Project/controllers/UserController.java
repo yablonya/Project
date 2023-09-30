@@ -1,5 +1,6 @@
 package com.project.Project.controllers;
 
+import com.project.Project.entity.ProgressRecordEntity;
 import com.project.Project.entity.UserEntity;
 import com.project.Project.services.UserService;
 import lombok.RequiredArgsConstructor;
@@ -27,11 +28,21 @@ public class UserController {
 
     @PostMapping("/add-progress-record")
     public ResponseEntity<UserEntity> addProgressRecord(
-            @RequestParam Integer height,
-            @RequestParam Integer weight,
-            @RequestParam String email, String password) {
+            @RequestBody ProgressRecordEntity progressRecord,
+            @RequestParam String email) {
         try {
-            return ResponseEntity.ok(userService.addProgressRecord(height, weight, email, password));
+            return ResponseEntity.ok(userService.addProgressRecord(progressRecord, email));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @PostMapping("/delete-progress-record")
+    public ResponseEntity<UserEntity> deleteProgressRecord(
+            @RequestBody ProgressRecordEntity progressRecord,
+            @RequestParam String email) {
+        try {
+            return ResponseEntity.ok(userService.deleteProgressRecord(progressRecord, email));
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();
         }
@@ -40,10 +51,20 @@ public class UserController {
     @PostMapping("/add-note")
     public ResponseEntity<UserEntity> addNote(
             @RequestParam String note,
-            @RequestParam String email,
-            @RequestParam String password) {
+            @RequestParam String email) {
         try {
-            return ResponseEntity.ok(userService.addNote(note, email, password));
+            return ResponseEntity.ok(userService.addNote(note, email));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @PostMapping("/delete-note")
+    public ResponseEntity<UserEntity> deleteNote(
+            @RequestParam String note,
+            @RequestParam String email) {
+        try {
+            return ResponseEntity.ok(userService.deleteNote(note, email));
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();
         }

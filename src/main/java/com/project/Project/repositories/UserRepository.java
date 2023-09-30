@@ -11,27 +11,27 @@ import java.util.Optional;
 public class UserRepository {
     private final ArrayList<UserEntity> users = new ArrayList<>();
 
-    public Optional<UserEntity> getUser(String email, String password) {
-        return users.stream()
-                .filter(item -> item.getEmail().equals(email) && item.getPassword().equals(password))
-                .findFirst();
-    }
-
-    public Boolean findUser(String email) {
-        for (UserEntity user : users) {
-            if (user.getEmail().equals(email)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     public UserEntity addUser(UserEntity user) {
         users.add(user);
         return user;
     }
 
+    public Optional<UserEntity> logUser(String email, String password) {
+        return users.stream()
+                .filter(item -> item.getEmail().equals(email) && item.getPassword().equals(password))
+                .findFirst();
+    }
+
+    public UserEntity getUser(String email) {
+        for (UserEntity user : users) {
+            if (user.getEmail().equals(email)) {
+                return user;
+            }
+        }
+        return null;
+    }
+
     public void deleteUser(String email, String password) {
-        users.remove(this.getUser(email, password).orElse(null));
+        users.remove(this.logUser(email, password).orElse(null));
     }
 }
